@@ -42,7 +42,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: smndhm/dev-config/.github/actions/setup@2e579ed1cd0c22cf6390b943b85036d7cc4dfda7 # main
+      - uses: smndhm/dev-config/ci/setup@main
 
       - name: Generate changesets for the updated dependencies
         run: pnpm exec changesets-renovate

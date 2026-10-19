@@ -1,13 +1,13 @@
-# @dume/a11y
+# Accessibility
 
-Accessibility checks for my projects, with [Playwright](https://playwright.dev): the parts their accessibility scripts share. What each one checks (pages, states, extensions) stays in the project.
+Accessibility checks for my projects, with [Playwright](https://playwright.dev): the parts their accessibility scripts share. What each one checks (pages, states, extensions) stays in the project. Part of the `@dume/dev-config` npm package.
 
 ```bash
-pnpm add -D @dume/a11y playwright
+pnpm add -D @dume/dev-config playwright
 ```
 
 ```js
-import { audit, contrastRatio, tabOrder } from '@dume/a11y';
+import { audit, contrastRatio, tabOrder } from '@dume/dev-config/a11y';
 
 // axe-core on the current state of the page: WCAG 2.2 A and AA, best practices, RGAA 4 and EN 301 549
 const violations = await audit(page);

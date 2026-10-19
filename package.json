@@ -1,22 +1,94 @@
 {
-  "name": "dev-config",
-  "private": true,
+  "name": "@dume/dev-config",
+  "version": "0.0.0",
+  "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, and accessibility checks with axe-core and Playwright",
+  "keywords": [
+    "a11y",
+    "axe-core",
+    "eslint",
+    "oxlint",
+    "prettier",
+    "stylelint"
+  ],
+  "homepage": "https://github.com/smndhm/dev-config#readme",
+  "bugs": {
+    "url": "https://github.com/smndhm/dev-config/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smndhm/dev-config.git"
+  },
+  "license": "BSD-2-Clause",
+  "author": {
+    "name": "Simon Duhem",
+    "email": "simon.duhem@gmail.com",
+    "url": "https://simon.duhem.fr"
+  },
   "type": "module",
   "packageManager": "pnpm@12.14.0",
-  "license": "BSD-2-Clause",
-  "prettier": "@dume/linting/prettier",
+  "files": [
+    "lint/*.mjs",
+    "lint/*.json",
+    "a11y/index.js",
+    "a11y/index.d.ts"
+  ],
+  "exports": {
+    "./lint/prettier": "./lint/prettier.config.mjs",
+    "./lint/oxlint.json": "./lint/oxlint.json",
+    "./lint/eslint": "./lint/eslint.config.mjs",
+    "./lint/stylelint": "./lint/stylelint.config.mjs",
+    "./a11y": {
+      "types": "./a11y/index.d.ts",
+      "import": "./a11y/index.js"
+    }
+  },
+  "prettier": "./lint/prettier.config.mjs",
   "scripts": {
     "lint": "prettier . --check && oxlint",
     "lint:fix": "prettier . --write && oxlint --fix",
+    "test": "node --test 'a11y/*.test.js'",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:publish": "changeset publish",
-    "test": "pnpm -r test"
+    "changeset:publish": "changeset publish"
+  },
+  "dependencies": {
+    "@eslint/json": "2.1.1",
+    "@eslint/markdown": "8.0.3",
+    "axe-core": "4.14.0",
+    "stylelint-config-idiomatic-order": "10.0.0",
+    "stylelint-config-standard-scss": "17.0.0",
+    "stylelint-prettier": "5.0.3"
+  },
+  "peerDependencies": {
+    "eslint": ">=10",
+    "oxlint": ">=1",
+    "playwright": ">=1",
+    "prettier": ">=3",
+    "stylelint": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    },
+    "playwright": {
+      "optional": true
+    },
+    "prettier": {
+      "optional": true
+    },
+    "stylelint": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",
-    "@dume/linting": "workspace:*",
+    "eslint": "10.12.0",
     "oxlint": "1.88.0",
-    "prettier": "3.9.10"
+    "playwright": "1.64.1",
+    "prettier": "3.9.10",
+    "stylelint": "17.16.0"
   }
 }

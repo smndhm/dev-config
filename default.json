@@ -1,22 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Renovate configuration of smndhm's repositories",
-  "extends": ["config:best-practices"],
-  "labels": ["dependencies"],
-  "gitIgnoredAuthors": ["renovate[bot]@users.noreply.github.com"],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
-  },
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
-      "automerge": true
-    },
-    {
-      "description": "My own packages, from smndhm/dev-config: no minimum release age, as pnpm's minimumReleaseAgeExclude in each repository",
-      "matchPackageNames": ["@dume/*"],
-      "minimumReleaseAge": "0 days"
-    }
-  ]
+  "description": "Moved to renovate/default.json: kept until every repository extends local>smndhm/dev-config//renovate/default",
+  "extends": ["local>smndhm/dev-config//renovate/default"]
 }

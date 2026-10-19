@@ -1,0 +1,19 @@
+name: Renovate → Changesets
+
+on:
+  push:
+    branches:
+      - 'renovate/**'
+
+jobs:
+  # This repository's own reusable workflow, as in the other repositories
+  changesets:
+    name: Add changeset
+    uses: ./.github/workflows/changesets-renovate.yml
+    permissions:
+      contents: write
+      statuses: write
+    with:
+      checks: |
+        pnpm lint
+        pnpm test

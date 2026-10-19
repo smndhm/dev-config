@@ -18,6 +18,8 @@ pnpm lint
 pnpm test
 ```
 
+The repository uses its own tools: its Prettier, oxlint and ESLint configurations, its Renovate preset, its setup action and its Renovate → Changesets workflow.
+
 `@dume/dev-config` is versioned with [Changesets](https://github.com/changesets/changesets): add one with `pnpm changeset`. Once on `main`, the [Release](.github/workflows/release.yml) workflow opens the "Version Packages" pull request, and publishes to npm when it is merged, with npm trusted publishing (no npm token).
 
 It replaces `@dume/linting`, from this repository too.

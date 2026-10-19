@@ -7,6 +7,7 @@ The configuration shared by my repositories: formatting, linting, dependency upd
 | Prettier, oxlint, ESLint and Stylelint configurations | [`packages/linting`](packages/linting)                                                   | the [`@dume/linting`](https://www.npmjs.com/package/@dume/linting) npm package |
 | Renovate configuration                                | [`default.json`](default.json)                                                           | a Renovate preset                                                              |
 | Node.js and pnpm setup for GitHub Actions             | [`.github/actions/setup`](.github/actions/setup/action.yml)                              | a composite action                                                             |
+| Accessibility checks with axe-core and Playwright     | [`packages/a11y`](packages/a11y)                                                         | the [`@dume/a11y`](https://www.npmjs.com/package/@dume/a11y) npm package       |
 | Changesets for Renovate's updates                     | [`.github/workflows/changesets-renovate.yml`](.github/workflows/changesets-renovate.yml) | a reusable workflow                                                            |
 
 ## In a repository

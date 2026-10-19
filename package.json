@@ -10,7 +10,8 @@
     "lint:fix": "prettier . --write && oxlint --fix",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:publish": "changeset publish"
+    "changeset:publish": "changeset publish",
+    "test": "pnpm -r test"
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",

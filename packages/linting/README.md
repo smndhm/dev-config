@@ -12,7 +12,7 @@ pnpm add -D @dume/linting
 
 ### ESLint
 
-Create an `eslint.config.mjs` file in your project root:
+For Markdown and JSON only: oxlint lints JavaScript and TypeScript. Create an `eslint.config.mjs` file in your project root:
 
 ```js
 import eslintConfig from '@dume/linting/eslint';

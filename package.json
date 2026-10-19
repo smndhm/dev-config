@@ -1,6 +1,6 @@
 {
   "name": "@dume/dev-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, and accessibility checks with axe-core and Playwright",
   "keywords": [
     "a11y",

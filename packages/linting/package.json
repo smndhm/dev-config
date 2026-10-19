@@ -43,20 +43,38 @@
     "./oxlint": "./src/oxlint.json"
   },
   "main": "./src/index.js",
-  "devDependencies": {
+  "dependencies": {
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.1.1",
     "@eslint/markdown": "8.0.3",
-    "eslint": "10.12.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-turbo": "2.11.8",
     "globals": "17.13.0",
-    "prettier": "3.9.10",
-    "stylelint": "17.16.0",
     "stylelint-config-idiomatic-order": "10.0.0",
     "stylelint-config-standard-scss": "17.0.0",
     "stylelint-prettier": "5.0.3",
     "typescript-eslint": "8.71.2"
+  },
+  "peerDependencies": {
+    "eslint": ">=10",
+    "prettier": ">=3",
+    "stylelint": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "prettier": {
+      "optional": true
+    },
+    "stylelint": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "eslint": "10.12.0",
+    "prettier": "3.9.10",
+    "stylelint": "17.16.0"
   },
   "packageManager": "pnpm@12.14.0"
 }

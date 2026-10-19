@@ -1,0 +1,21 @@
+{
+  "name": "dev-config",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "license": "BSD-2-Clause",
+  "prettier": "@dume/linting/prettier",
+  "scripts": {
+    "lint": "prettier . --check && oxlint",
+    "lint:fix": "prettier . --write && oxlint --fix",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.3",
+    "@dume/linting": "workspace:*",
+    "oxlint": "1.88.0",
+    "prettier": "3.9.10"
+  }
+}

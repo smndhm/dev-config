@@ -12,6 +12,11 @@
     {
       "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
       "automerge": true
+    },
+    {
+      "description": "My own packages, from smndhm/dev-config: no minimum release age, as pnpm's minimumReleaseAgeExclude in each repository",
+      "matchPackageNames": ["@dume/*"],
+      "minimumReleaseAge": "0 days"
     }
   ]
 }

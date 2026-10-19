@@ -53,6 +53,13 @@ steps:
   - uses: smndhm/dev-config/.github/actions/setup@<commit SHA>
 ```
 
+My own `@dume/*` packages can be used as soon as they are published: the Renovate preset gives them no minimum release age, and each repository excludes them from pnpm's in `pnpm-workspace.yaml`:
+
+```yaml
+minimumReleaseAgeExclude:
+  - '@dume/*'
+```
+
 Settings of a single repository go next to the shared ones: rules in its `.oxlintrc.json`, package rules in its `renovate.json`.
 
 ## Development

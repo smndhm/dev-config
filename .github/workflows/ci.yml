@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: ./.github/actions/setup
+      - uses: ./ci/setup
 
       - name: Lint and format check
         run: pnpm lint
@@ -29,4 +29,4 @@ jobs:
         run: pnpm test
 
       - name: Renovate preset
-        run: pnpm dlx --package renovate@43.288.0 renovate-config-validator default.json renovate.json
+        run: pnpm dlx --package renovate@43.288.0 renovate-config-validator renovate/default.json default.json renovate.json

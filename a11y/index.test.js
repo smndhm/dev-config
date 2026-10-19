@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { contrastRatio, parseRgb, TAGS } from '../src/index.js';
+import { contrastRatio, parseRgb, TAGS } from './index.js';
 
 test('parses computed colors', () => {
   assert.deepEqual(parseRgb('rgb(75, 1, 149)'), [75, 1, 149]);

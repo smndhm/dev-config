@@ -28,6 +28,29 @@ import prettierConfig from '@dume/linting/prettier';
 export default prettierConfig;
 ```
 
+### oxlint
+
+Create an `.oxlintrc.json` file in your project root (oxlint resolves `extends` as a file path):
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./node_modules/@dume/linting/src/oxlint.json"]
+}
+```
+
+Add your project's `ignorePatterns` or rules next to `extends`.
+
+### Prettier from package.json
+
+Instead of a `prettier.config.mjs` file:
+
+```json
+{
+  "prettier": "@dume/linting/prettier"
+}
+```
+
 ### Stylelint
 
 Create a `stylelint.config.mjs` file in your project root:

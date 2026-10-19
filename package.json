@@ -5,6 +5,7 @@
   "keywords": [
     "linting",
     "eslint",
+    "oxlint",
     "prettier",
     "stylelint"
   ],
@@ -38,7 +39,8 @@
     },
     "./eslint": {
       "import": "./src/eslint.config.mjs"
-    }
+    },
+    "./oxlint": "./src/oxlint.json"
   },
   "main": "./src/index.js",
   "devDependencies": {

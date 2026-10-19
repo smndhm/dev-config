@@ -44,12 +44,13 @@
   },
   "prettier": "./lint/prettier.config.mjs",
   "scripts": {
-    "lint": "prettier . --check && oxlint",
-    "lint:fix": "prettier . --write && oxlint --fix",
+    "lint": "prettier . --check && oxlint && eslint .",
+    "lint:fix": "prettier . --write && oxlint --fix && eslint . --fix",
     "test": "node --test 'a11y/*.test.js'",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:publish": "changeset publish"
+    "changeset:publish": "changeset publish",
+    "changeset:renovate": "changesets-renovate"
   },
   "dependencies": {
     "@eslint/json": "2.1.1",
@@ -85,6 +86,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",
+    "@scaleway/changesets-renovate": "4.0.5",
     "eslint": "10.12.0",
     "oxlint": "1.88.0",
     "playwright": "1.64.1",

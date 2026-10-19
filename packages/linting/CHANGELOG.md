@@ -1,5 +1,11 @@
 # @dume/linting
 
+## 1.1.1
+
+### Patch Changes
+
+- 03ed97c: The ESLint and Stylelint plugins and configurations the package extends are dependencies, so they are installed with it; ESLint, Prettier and Stylelint are optional peer dependencies.
+
 ## 1.1.0
 
 ### Minor Changes

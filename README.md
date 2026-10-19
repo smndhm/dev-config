@@ -2,11 +2,12 @@
 
 The configuration shared by my repositories: formatting, linting, dependency updates and CI setup. Change it here, and Renovate takes it to every repository.
 
-| What                                                  | Where                                                       | Used as                                                                        |
-| ----------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Prettier, oxlint, ESLint and Stylelint configurations | [`packages/linting`](packages/linting)                      | the [`@dume/linting`](https://www.npmjs.com/package/@dume/linting) npm package |
-| Renovate configuration                                | [`default.json`](default.json)                              | a Renovate preset                                                              |
-| Node.js and pnpm setup for GitHub Actions             | [`.github/actions/setup`](.github/actions/setup/action.yml) | a composite action                                                             |
+| What                                                  | Where                                                                                    | Used as                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Prettier, oxlint, ESLint and Stylelint configurations | [`packages/linting`](packages/linting)                                                   | the [`@dume/linting`](https://www.npmjs.com/package/@dume/linting) npm package |
+| Renovate configuration                                | [`default.json`](default.json)                                                           | a Renovate preset                                                              |
+| Node.js and pnpm setup for GitHub Actions             | [`.github/actions/setup`](.github/actions/setup/action.yml)                              | a composite action                                                             |
+| Changesets for Renovate's updates                     | [`.github/workflows/changesets-renovate.yml`](.github/workflows/changesets-renovate.yml) | a reusable workflow                                                            |
 
 ## In a repository
 
@@ -58,6 +59,27 @@ My own `@dume/*` packages can be used as soon as they are published: the Renovat
 ```yaml
 minimumReleaseAgeExclude:
   - '@dume/*'
+```
+
+In a repository versioned with Changesets, the reusable workflow adds a changeset to each Renovate branch, then runs the repository's checks on that commit (a commit pushed by a workflow does not trigger the CI) and reports them as the "Renovate changeset checks" status, which Renovate waits for before merging. The repository needs `@scaleway/changesets-renovate`:
+
+```yaml
+name: Renovate → Changesets
+
+on:
+  push:
+    branches: ['renovate/**']
+
+jobs:
+  changesets:
+    uses: smndhm/dev-config/.github/workflows/changesets-renovate.yml@<commit SHA>
+    permissions:
+      contents: write
+      statuses: write
+    with:
+      checks: |
+        pnpm lint
+        pnpm test
 ```
 
 Settings of a single repository go next to the shared ones: rules in its `.oxlintrc.json`, package rules in its `renovate.json`.

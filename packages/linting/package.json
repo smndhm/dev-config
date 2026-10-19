@@ -9,16 +9,16 @@
     "prettier",
     "stylelint"
   ],
-  "homepage": "https://github.com/smndhm/blu/tree/main/packages/linting#readme",
+  "homepage": "https://github.com/smndhm/dev-config/tree/main/packages/linting#readme",
   "bugs": {
-    "url": "https://github.com/smndhm/blu/issues"
+    "url": "https://github.com/smndhm/dev-config/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smndhm/blu.git",
+    "url": "git+https://github.com/smndhm/dev-config.git",
     "directory": "packages/linting"
   },
-  "license": "ISC",
+  "license": "BSD-2-Clause",
   "author": {
     "name": "Simon Duhem",
     "email": "simon.duhem@gmail.com",

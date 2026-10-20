@@ -1,5 +1,11 @@
 # @dume/dev-config
 
+## 1.1.0
+
+### Minor Changes
+
+- 09df7e7: Claude Code settings (no attribution in commits and pull requests), copied into each repository by the new `dev-config sync` command; `dev-config sync --check` fails when they differ.
+
 ## 1.0.0
 
 ### Major Changes

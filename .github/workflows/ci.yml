@@ -29,4 +29,4 @@ jobs:
         run: pnpm test
 
       - name: Renovate preset
-        run: pnpm dlx --package renovate@43.288.0 renovate-config-validator renovate/default.json default.json renovate.json
+        run: pnpm dlx --package renovate@43.288.0 renovate-config-validator renovate/default.json renovate.json

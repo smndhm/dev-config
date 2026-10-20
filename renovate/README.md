@@ -20,8 +20,6 @@ minimumReleaseAgeExclude:
   - '@dume/*'
 ```
 
-The [`default.json`](../default.json) at the root of this repository only points here: it stays until every repository extends `local>smndhm/dev-config//renovate/default`.
-
 ## Renovate branches
 
 [`.github/workflows/renovate-branch.yml`](../.github/workflows/renovate-branch.yml) is a reusable workflow (GitHub only runs them from `.github/workflows`) for each Renovate branch:

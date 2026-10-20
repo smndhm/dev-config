@@ -1,5 +1,0 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Moved to renovate/default.json: kept until every repository extends local>smndhm/dev-config//renovate/default",
-  "extends": ["local>smndhm/dev-config//renovate/default"]
-}

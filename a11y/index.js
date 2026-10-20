@@ -10,20 +10,19 @@ export const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'be
 // Read once, injected into each page: an extension page's Content Security Policy blocks a script tag, not this
 const AXE_SOURCE = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
 
+/** axe's options for TAGS (or `tags`), without the rules of `disable` */
+const runOptions = ({ tags = TAGS, disable = [] } = {}) => ({
+  runOnly: { type: 'tag', values: tags },
+  rules: Object.fromEntries(disable.map(id => [id, { enabled: false }])),
+});
+
 /**
- * Runs axe on the current state of a Playwright page and describes each violation: impact, rule, RGAA criteria,
- * help and link, then the elements in cause. An empty array means no violation. `disable` turns off rules by id,
- * for a page whose structure the project does not write (say why next to it).
+ * Describes axe's violations: impact, rule, RGAA criteria, help and link, then the elements in cause.
  *
- * @param {import('playwright').Page} page
- * @param {{ tags?: string[], disable?: string[] }} [options]
- * @returns {Promise<string[]>}
+ * @param {{ id: string, impact: string, help: string, helpUrl: string, tags: string[], nodes: { target: string[] }[] }[]} violations
+ * @returns {string[]}
  */
-export async function audit(page, { tags = TAGS, disable = [] } = {}) {
-  // evaluate() runs in the page through the DevTools protocol, so the page's CSP does not apply
-  await page.evaluate(AXE_SOURCE);
-  const rules = Object.fromEntries(disable.map(id => [id, { enabled: false }]));
-  const { violations } = await page.evaluate(options => window.axe.run(document, options), { runOnly: { type: 'tag', values: tags }, rules });
+export function describeViolations(violations) {
   return violations.map(violation => {
     const rgaa = violation.tags.filter(tag => tag.startsWith('RGAA-')).map(tag => tag.replace('RGAA-', 'RGAA '));
     return [
@@ -32,6 +31,38 @@ export async function audit(page, { tags = TAGS, disable = [] } = {}) {
       ...violation.nodes.map(node => `  - ${node.target.join(' ')}`),
     ].join('\n');
   });
+}
+
+/**
+ * Runs axe on the current state of a Playwright page and describes each violation (see describeViolations). An
+ * empty array means no violation. `disable` turns off rules by id, for a page whose structure the project does not
+ * write (say why next to it).
+ *
+ * @param {import('playwright').Page} page
+ * @param {{ tags?: string[], disable?: string[] }} [options]
+ * @returns {Promise<string[]>}
+ */
+export async function audit(page, options) {
+  // evaluate() runs in the page through the DevTools protocol, so the page's CSP does not apply
+  await page.evaluate(AXE_SOURCE);
+  const { violations } = await page.evaluate(axeOptions => window.axe.run(document, axeOptions), runOptions(options));
+  return describeViolations(violations);
+}
+
+/**
+ * The same audit for a browser driven by something else than Playwright, such as Selenium: a script to run as an
+ * asynchronous script (its last argument is the callback), which calls back with axe's violations, for
+ * describeViolations, or with `{ error }`.
+ *
+ *     describeViolations(await driver.executeAsyncScript(axeScript()))
+ *
+ * @param {{ tags?: string[], disable?: string[] }} [options]
+ * @returns {string}
+ */
+export function axeScript(options) {
+  return `${AXE_SOURCE}
+const done = arguments[arguments.length - 1];
+axe.run(document, ${JSON.stringify(runOptions(options))}).then(result => done(result.violations), error => done({ error: String(error) }));`;
 }
 
 /**

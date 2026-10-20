@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { contrastRatio, parseRgb, TAGS } from './index.js';
+import { axeScript, contrastRatio, describeViolations, parseRgb, TAGS } from './index.js';
 
 test('parses computed colors', () => {
   assert.deepEqual(parseRgb('rgb(75, 1, 149)'), [75, 1, 149]);
@@ -19,4 +19,24 @@ test('computes the WCAG contrast ratio, in any order', () => {
 
 test('audits WCAG 2.2 AA, best practices, RGAA and EN 301 549', () => {
   assert.deepEqual(TAGS, ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice', 'RGAAv4', 'EN-301-549']);
+});
+
+test('describes violations, with their RGAA criteria', () => {
+  const [description] = describeViolations([
+    {
+      id: 'image-alt',
+      impact: 'critical',
+      help: 'Images must have alternative text',
+      helpUrl: 'https://dequeuniversity.com/rules/axe/image-alt',
+      tags: ['wcag2a', 'RGAA-1.1.1'],
+      nodes: [{ target: ['img'] }],
+    },
+  ]);
+  assert.equal(description, '[critical] image-alt (RGAA 1.1.1): Images must have alternative text\n  https://dequeuniversity.com/rules/axe/image-alt\n  - img');
+});
+
+test('gives the same rules to the script for other drivers', () => {
+  const script = axeScript({ disable: ['region'] });
+  assert.ok(script.includes(JSON.stringify({ runOnly: { type: 'tag', values: TAGS }, rules: { region: { enabled: false } } })));
+  assert.ok(script.includes('arguments[arguments.length - 1]'));
 });

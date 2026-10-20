@@ -1,41 +1,47 @@
-# Reusable workflow: on a Renovate branch, adds the changesets of the updated dependencies, then runs the
-# repository's checks on that commit and reports them as one commit status.
+# Reusable workflow, for each Renovate branch: copies @dume/dev-config's files into the repository (dev-config sync),
+# adds the changesets of the updated dependencies when the repository uses Changesets, then runs the repository's
+# checks on that commit and reports them as one commit status.
 #
-# A commit pushed with GITHUB_TOKEN does not trigger the repository's CI, so Renovate would automerge it
-# without checks: the "checks" input runs them here instead. The repository needs
+# A commit pushed with GITHUB_TOKEN does not trigger the repository's CI, so Renovate would automerge it without
+# checks: the "checks" input runs them here instead. With "changesets", the repository needs
 # @scaleway/changesets-renovate as a dependency.
 #
 # on:
 #   push:
 #     branches: ['renovate/**']
 # jobs:
-#   changesets:
-#     uses: smndhm/dev-config/.github/workflows/changesets-renovate.yml@<commit SHA>
+#   renovate:
+#     uses: smndhm/dev-config/.github/workflows/renovate-branch.yml@<commit SHA> # main
 #     permissions:
 #       contents: write
 #       statuses: write
 #     with:
+#       changesets: true
 #       checks: |
 #         pnpm lint
 #         pnpm test
 
-name: Renovate → Changesets
+name: Renovate branch
 
 on:
   workflow_call:
     inputs:
+      changesets:
+        description: Add the changesets of the updated dependencies (repositories versioned with Changesets)
+        type: boolean
+        default: false
       checks:
         description: The repository's checks, a shell script run on the changeset commit (one command per line, stops at the first failure)
         required: true
         type: string
 
 permissions:
-  contents: write # Push the changeset commit
-  statuses: write # Report the checks on the changeset commit
+  contents: write # Push the commit
+  statuses: write # Report the checks on the commit
 
 jobs:
-  changesets:
-    name: Add changeset
+  renovate-branch:
+    name: Sync and changesets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -44,23 +50,28 @@ jobs:
 
       - uses: smndhm/dev-config/ci/setup@main
 
+      # The files of @dume/dev-config, which Claude Code reads before anything is installed
+      - name: Copy @dume/dev-config's files
+        run: if [ -x node_modules/.bin/dev-config ]; then pnpm exec dev-config sync; fi
+
       - name: Generate changesets for the updated dependencies
+        if: inputs.changesets
         run: pnpm exec changesets-renovate
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Commit changesets
+      - name: Commit
         id: commit
         run: |
           # Authored by Renovate so that Renovate keeps rebasing the branch
           export GIT_AUTHOR_NAME="renovate[bot]" GIT_AUTHOR_EMAIL="renovate[bot]@users.noreply.github.com"
           export GIT_COMMITTER_NAME="renovate[bot]" GIT_COMMITTER_EMAIL="renovate[bot]@users.noreply.github.com"
-          git add .changeset
-          if git commit -m "chore(changesets): add changeset for renovate"; then
+          for path in .changeset .claude; do if [ -e "$path" ]; then git add --all "$path"; fi; done
+          if git commit -m "chore: changesets and @dume/dev-config files for renovate"; then
             git push
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "No changeset to commit"
+            echo "Nothing to commit"
           fi
 
       - name: Checks
@@ -78,5 +89,5 @@ jobs:
           TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           gh api "repos/${{ github.repository }}/statuses/$(git rev-parse HEAD)" \
-            -f state="$STATE" -f context="Renovate changeset checks" \
-            -f description="The repository's checks on the changeset commit" -f target_url="$TARGET_URL"
+            -f state="$STATE" -f context="Renovate branch checks" \
+            -f description="The repository's checks on the commit of changesets and dev-config files" -f target_url="$TARGET_URL"

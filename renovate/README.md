@@ -24,7 +24,7 @@ minimumReleaseAgeExclude:
 
 [`.github/workflows/renovate-branch.yml`](../.github/workflows/renovate-branch.yml) is a reusable workflow (GitHub only runs them from `.github/workflows`) for each Renovate branch:
 
-1. copies `@dume/dev-config`'s files into the repository (`dev-config sync`: the [Claude](../claude) settings and the [pre-commit hook](../lint#pre-commit-hook)), when the repository has the package;
+1. copies `@dume/dev-config`'s files into the repository (`dev-config sync`: the [AI assistant](../ia) settings and the [pre-commit hook](../lint#pre-commit-hook)), when the repository has the package;
 2. with `changesets: true`, adds the changesets of the updated dependencies (the repository needs `@scaleway/changesets-renovate`);
 3. commits them as Renovate, so that Renovate keeps rebasing the branch;
 4. runs the repository's checks on that commit, since a commit pushed by a workflow does not trigger the CI, and reports them as the "Renovate branch checks" status, which Renovate waits for before merging.

@@ -1,4 +1,8 @@
-# Claude
+# AI
+
+The settings of the AI coding assistants of my repositories, whatever the provider: Claude Code for now.
+
+## Claude Code
 
 The Claude Code settings of my repositories, in [`.claude/settings.json`](../.claude/settings.json), this repository's own:
 

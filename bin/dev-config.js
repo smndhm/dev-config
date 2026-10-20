@@ -13,8 +13,8 @@ import process from 'node:process';
 
 const PACKAGE_DIR = join(import.meta.dirname, '..');
 
-// Package file → repository file
-const FILES = [['claude/settings.json', '.claude/settings.json']];
+// Files of the package, copied at the same place in the repository: in smndhm/dev-config, they are its own
+const FILES = ['.claude/settings.json'];
 
 const readOrNothing = file => readFile(file, 'utf8').catch(() => undefined);
 
@@ -26,8 +26,8 @@ if (command !== 'sync') {
 const check = options.includes('--check');
 
 let outdated = 0;
-for (const [from, to] of FILES) {
-  const expected = await readFile(join(PACKAGE_DIR, from), 'utf8');
+for (const to of FILES) {
+  const expected = await readFile(join(PACKAGE_DIR, to), 'utf8');
   if ((await readOrNothing(to)) === expected) continue;
   if (check) {
     outdated++;

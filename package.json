@@ -35,7 +35,7 @@
     "a11y/index.js",
     "a11y/index.d.ts",
     "bin/dev-config.js",
-    "claude/settings.json"
+    ".claude/settings.json"
   ],
   "exports": {
     "./lint/prettier": "./lint/prettier.config.mjs",

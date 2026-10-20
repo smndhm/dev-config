@@ -1,7 +1,7 @@
 {
   "name": "@dume/dev-config",
   "version": "1.0.0",
-  "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, and accessibility checks with axe-core and Playwright",
+  "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, accessibility checks with axe-core and Playwright, and Claude Code settings",
   "keywords": [
     "a11y",
     "axe-core",
@@ -26,11 +26,16 @@
   },
   "type": "module",
   "packageManager": "pnpm@12.14.0",
+  "bin": {
+    "dev-config": "./bin/dev-config.js"
+  },
   "files": [
     "lint/*.mjs",
     "lint/*.json",
     "a11y/index.js",
-    "a11y/index.d.ts"
+    "a11y/index.d.ts",
+    "bin/dev-config.js",
+    ".claude/settings.json"
   ],
   "exports": {
     "./lint/prettier": "./lint/prettier.config.mjs",
@@ -44,7 +49,7 @@
   },
   "prettier": "./lint/prettier.config.mjs",
   "scripts": {
-    "lint": "prettier . --check && oxlint && eslint .",
+    "lint": "prettier . --check && oxlint && eslint . && node bin/dev-config.js sync --check",
     "lint:fix": "prettier . --write && oxlint --fix && eslint . --fix",
     "test": "node --test 'a11y/*.test.js'",
     "changeset": "changeset",

@@ -21,3 +21,32 @@ minimumReleaseAgeExclude:
 ```
 
 The [`default.json`](../default.json) at the root of this repository only points here: it stays until every repository extends `local>smndhm/dev-config//renovate/default`.
+
+## Renovate branches
+
+[`.github/workflows/renovate-branch.yml`](../.github/workflows/renovate-branch.yml) is a reusable workflow (GitHub only runs them from `.github/workflows`) for each Renovate branch:
+
+1. copies `@dume/dev-config`'s files into the repository (`dev-config sync`, see [Claude](../claude)), when the repository has the package;
+2. with `changesets: true`, adds the changesets of the updated dependencies (the repository needs `@scaleway/changesets-renovate`);
+3. commits them as Renovate, so that Renovate keeps rebasing the branch;
+4. runs the repository's checks on that commit, since a commit pushed by a workflow does not trigger the CI, and reports them as the "Renovate branch checks" status, which Renovate waits for before merging.
+
+```yaml
+name: Renovate branch
+
+on:
+  push:
+    branches: ['renovate/**']
+
+jobs:
+  renovate-branch:
+    uses: smndhm/dev-config/.github/workflows/renovate-branch.yml@<commit SHA> # main
+    permissions:
+      contents: write
+      statuses: write
+    with:
+      changesets: true
+      checks: |
+        pnpm lint
+        pnpm test
+```

@@ -1,0 +1,2 @@
+# Exact versions when adding a dependency: a caret would let in a release nobody tested
+savePrefix: ''

@@ -1,5 +1,11 @@
 # @dume/dev-config
 
+## 1.2.0
+
+### Minor Changes
+
+- 521c40c: `axeScript` runs the same accessibility audit in a browser driven by something else than Playwright, such as Selenium, and `describeViolations` describes its violations as `audit` does.
+
 ## 1.1.0
 
 ### Minor Changes

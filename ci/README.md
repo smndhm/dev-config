@@ -8,4 +8,4 @@ steps:
   - uses: smndhm/dev-config/ci/setup@<commit SHA> # main
 ```
 
-Renovate keeps the commit up to date. `.github/actions/setup` points here: it stays until every repository uses `ci/setup`.
+Renovate keeps the commit up to date.

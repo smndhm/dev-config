@@ -1,7 +1,0 @@
-name: Setup (moved to ci/setup)
-description: Moved to smndhm/dev-config/ci/setup, kept until every repository uses the new path
-
-runs:
-  using: composite
-  steps:
-    - uses: smndhm/dev-config/ci/setup@main

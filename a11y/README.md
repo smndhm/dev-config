@@ -20,3 +20,11 @@ const { ok, order } = await tabOrder(page, ['#search', 'nav a', 'main a']);
 ```
 
 `audit` injects axe-core into the page through the DevTools protocol, so it also works on browser extension pages, whose Content Security Policy blocks injected scripts. `audit(page, { tags })` runs other axe tags than `TAGS`, and `audit(page, { disable: ['landmark-one-main'] })` turns off rules by id, for a page whose structure the project does not write: say why next to it.
+
+A browser driven by something else than Playwright, such as Selenium, runs the same audit with `axeScript`, an asynchronous script that calls back with axe's violations:
+
+```js
+import { axeScript, describeViolations } from '@dume/dev-config/a11y';
+
+const violations = describeViolations(await driver.executeAsyncScript(axeScript()));
+```

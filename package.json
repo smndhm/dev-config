@@ -1,11 +1,13 @@
 {
   "name": "@dume/dev-config",
   "version": "1.2.0",
-  "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, accessibility checks with axe-core and Playwright, and Claude Code settings",
+  "description": "The configuration shared by my projects: Prettier, oxlint, ESLint and Stylelint configurations, a pre-commit hook with husky and lint-staged, accessibility checks with axe-core and Playwright, and Claude Code settings",
   "keywords": [
     "a11y",
     "axe-core",
     "eslint",
+    "husky",
+    "lint-staged",
     "oxlint",
     "prettier",
     "stylelint"
@@ -35,13 +37,15 @@
     "a11y/index.js",
     "a11y/index.d.ts",
     "bin/dev-config.js",
-    ".claude/settings.json"
+    ".claude/settings.json",
+    ".husky/pre-commit"
   ],
   "exports": {
     "./lint/prettier": "./lint/prettier.config.mjs",
     "./lint/oxlint.json": "./lint/oxlint.json",
     "./lint/eslint": "./lint/eslint.config.mjs",
     "./lint/stylelint": "./lint/stylelint.config.mjs",
+    "./lint/lint-staged": "./lint/lint-staged.config.mjs",
     "./a11y": {
       "types": "./a11y/index.d.ts",
       "import": "./a11y/index.js"
@@ -49,7 +53,9 @@
   },
   "prettier": "./lint/prettier.config.mjs",
   "scripts": {
-    "lint": "prettier . --check && oxlint && eslint . && node bin/dev-config.js sync --check",
+    "dev-config": "node bin/dev-config.js",
+    "prepare": "node bin/dev-config.js hooks",
+    "lint": "prettier . --check && oxlint && eslint . && pnpm dev-config sync --check",
     "lint:fix": "prettier . --write && oxlint --fix && eslint . --fix",
     "test": "node --test 'a11y/*.test.js'",
     "changeset": "changeset",
@@ -61,6 +67,8 @@
     "@eslint/json": "2.1.1",
     "@eslint/markdown": "8.0.3",
     "axe-core": "4.14.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
     "stylelint-config-idiomatic-order": "10.0.0",
     "stylelint-config-standard-scss": "17.0.0",
     "stylelint-prettier": "5.0.3"

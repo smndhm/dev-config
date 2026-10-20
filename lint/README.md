@@ -49,3 +49,19 @@ export default {
   extends: '@dume/dev-config/lint/stylelint',
 };
 ```
+
+## Pre-commit hook
+
+On each commit, the linters' fixes and Prettier on the staged files: oxlint, then ESLint and Stylelint when the repository has their configuration, then Prettier. The commit stops on what they cannot fix.
+
+In `package.json`:
+
+```json
+{
+  "scripts": {
+    "prepare": "dev-config hooks"
+  }
+}
+```
+
+`dev-config hooks` makes git run the hooks of `.husky/` (with husky, not in CI), and `dev-config sync` copies the hook, `.husky/pre-commit`, which runs `dev-config pre-commit` (lint-staged with [`lint-staged.config.mjs`](lint-staged.config.mjs)). husky and lint-staged come with the package.

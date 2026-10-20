@@ -1,5 +1,11 @@
 # @dume/dev-config
 
+## 1.3.0
+
+### Minor Changes
+
+- 0a2fafe: Pre-commit hook: `dev-config hooks` (husky) and `dev-config pre-commit` (lint-staged with the shared configuration, also exported as `@dume/dev-config/lint/lint-staged`), and `dev-config sync` copies `.husky/pre-commit`
+
 ## 1.2.0
 
 ### Minor Changes

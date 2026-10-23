@@ -17,6 +17,11 @@ export default {
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
     ],
+    // Sizes in rem on the base 4, multiples of 0.25rem (4px): `0.25rem`, `0.5rem`, `1.75rem`, not `0.3rem`
+    'declaration-property-value-disallowed-list': [
+      { '/.*/': ['/(?<![\\w.])\\d*\\.(?!(?:0*|25|5|50|75)0*rem\\b)\\d+rem\\b/'] },
+      { message: (property, value) => `Expected "${value}" (${property}) in rem on the base 4: multiples of 0.25rem.` },
+    ],
     // Logical properties and values (`margin-inline-start`, `text-align: start`): the same CSS for left-to-right and
     // right-to-left languages
     'csstools/use-logical': 'always',

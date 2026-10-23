@@ -52,6 +52,8 @@ export default {
 
 Logical properties and values, for left-to-right and right-to-left languages alike: `margin-inline-start` rather than `margin-left`, `text-align: start` rather than `left` (`stylelint-use-logical`).
 
+Sizes in `rem` are on the base 4, multiples of `0.25rem` (4px): `0.25rem`, `0.5rem`, `1.75rem`, not `0.3rem` nor `0.9375rem`.
+
 Custom properties are in kebab case, and a design token (`--ds-`) follows @dume/ds's taxonomy: `--ds-b-{category}-{role}-{variant}` for a base one, `--ds-c-{component}-{category}-…` for a component's, `--ds-l-{layout}-{category}-…` for a layout's, the category `color`, `font`, `size` or `outline` (`--ds-b-color-text-muted`, `--ds-c-button-size-min-height`; not `--ds-b-focus-outline`).
 
 ## Pre-commit hook

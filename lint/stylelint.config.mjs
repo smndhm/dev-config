@@ -18,11 +18,16 @@ export default {
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
     ],
-    // Spacing, font sizes and radii from custom properties (`var(--ds-b-size-16)`), not in rem or px: the scale is
-    // in one place. `0`, `auto`, `inherit` and `em`, which follows the text, stay allowed
+    // Spacing, font sizes, radii and border widths from custom properties (`var(--ds-b-size-16)`), not in rem or px:
+    // the scale is in one place. `0`, `auto`, `inherit`, `none`, `em`, which follows the text, and a border's style
+    // stay allowed
     'scale-unlimited/declaration-strict-value': [
-      ['/^(margin|padding|inset|gap|row-gap|column-gap)/', 'font-size', '/^border(-.+)?-radius$/'],
-      { ignoreValues: ['0', 'auto', 'inherit', '/^-?\\d*\\.?\\d+em$/'], expandShorthand: true, recurseLonghand: true },
+      ['/^(margin|padding|inset|gap|row-gap|column-gap)/', 'font-size', '/^border(-.+)?-radius$/', '/^border(-.+)?-width$/', '/^border-(block|inline)(-(start|end))?$/'],
+      {
+        ignoreValues: ['0', 'auto', 'inherit', 'none', '/^-?\\d*\\.?\\d+em$/', '/^(solid|dashed|dotted|double)$/', '/^(currentcolor|transparent)$/i'],
+        expandShorthand: true,
+        recurseLonghand: true,
+      },
     ],
     // Sizes in rem on the base 4, multiples of 0.25rem (4px): `0.25rem`, `0.5rem`, `1.75rem`, not `0.3rem`
     'declaration-property-value-disallowed-list': [

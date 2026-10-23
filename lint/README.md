@@ -54,8 +54,6 @@ Logical properties and values, for left-to-right and right-to-left languages ali
 
 Custom properties are in kebab case, and a design token (`--ds-`) follows @dume/ds's taxonomy: `--ds-b-{category}-{role}-{variant}` for a base one, `--ds-c-{component}-{category}-…` for a component's, `--ds-l-{layout}-{category}-…` for a layout's, the category `color`, `font`, `size` or `outline` (`--ds-b-color-text-muted`, `--ds-c-button-size-min-height`; not `--ds-b-focus-outline`).
 
-In a project that installs `@dume/ds` (resolved from the directory Stylelint runs in), a `var()` may only name its design tokens or a custom property the project declares: a misspelled or renamed token (`var(--ds-b-color-primay)`) is an error, rather than a value the browser ignores.
-
 ## Pre-commit hook
 
 On each commit, the linters' fixes and Prettier on the staged files: oxlint, then ESLint and Stylelint when the repository has their configuration, then Prettier. The commit stops on what they cannot fix.

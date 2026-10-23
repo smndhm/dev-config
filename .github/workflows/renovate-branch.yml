@@ -48,7 +48,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: smndhm/dev-config/ci/setup@main
+      - uses: smndhm/dev-config/ci/setup@4174cbd36b89719d9ef41d66f28ea288d2e0e951 # main
 
       # The files of @dume/dev-config, which Claude Code and git read before anything is installed
       - name: Copy @dume/dev-config's files

@@ -50,6 +50,8 @@ export default {
 };
 ```
 
+In a project that installs `@dume/design` (resolved from the directory Stylelint runs in), a `var()` may only name its design tokens or a custom property the project declares: a misspelled or renamed token (`var(--sd-b-color-primay)`) is an error, rather than a value the browser ignores.
+
 ## Pre-commit hook
 
 On each commit, the linters' fixes and Prettier on the staged files: oxlint, then ESLint and Stylelint when the repository has their configuration, then Prettier. The commit stops on what they cannot fix.

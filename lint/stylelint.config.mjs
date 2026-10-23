@@ -1,8 +1,9 @@
+import strictValue from 'stylelint-declaration-strict-value';
 import useLogical from 'stylelint-use-logical';
 
 export default {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-idiomatic-order', 'stylelint-prettier/recommended'],
-  plugins: [useLogical],
+  plugins: [strictValue, useLogical],
   rules: {
     // Kebab case, as stylelint-config-standard asks; a design token (`--ds-`) after @dume/ds's taxonomy:
     // --ds-b-{category}-{role}-{variant} for a base one, --ds-c-{component}-{category}-… for a component's,
@@ -16,6 +17,12 @@ export default {
             ? `Expected design token "${name}" to be --ds-b-{category}-…, --ds-c-{component}-{category}-… or --ds-l-{layout}-{category}-…, the category color, font, size or outline.`
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
+    ],
+    // Spacing, font sizes and radii from custom properties (`var(--ds-b-size-space-16)`), not in rem or px: the scale is
+    // in one place. `0`, `auto`, `inherit` and `em`, which follows the text, stay allowed
+    'scale-unlimited/declaration-strict-value': [
+      ['/^(margin|padding|inset|gap|row-gap|column-gap)/', 'font-size', '/^border(-.+)?-radius$/'],
+      { ignoreValues: ['0', 'auto', 'inherit', '/^-?\\d*\\.?\\d+em$/'], expandShorthand: true, recurseLonghand: true },
     ],
     // Sizes in rem on the base 4, multiples of 0.25rem (4px): `0.25rem`, `0.5rem`, `1.75rem`, not `0.3rem`
     'declaration-property-value-disallowed-list': [

@@ -1,5 +1,16 @@
 # @dume/dev-config
 
+## 1.4.0
+
+### Minor Changes
+
+- 3cf269b: Stylelint: a custom property named `--ds-` follows @dume/ds's taxonomy (`--ds-b-{category}-…`, `--ds-c-{component}-{category}-…`, `--ds-l-{layout}-{category}-…`). Logical properties and values are required (stylelint-use-logical). Spacing, font sizes, radii and border widths come from custom properties (stylelint-declaration-strict-value), and sizes in rem are on the base 4, multiples of 0.25rem.
+
+### Patch Changes
+
+- 19119a1: Updated dependency `oxlint` to `1.89.0`.
+- 54649d0: Updated dependency `eslint` to `10.13.0`.
+
 ## 1.3.0
 
 ### Minor Changes

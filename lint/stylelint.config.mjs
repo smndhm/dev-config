@@ -18,7 +18,7 @@ export default {
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
     ],
-    // Spacing, font sizes and radii from custom properties (`var(--ds-b-size-space-16)`), not in rem or px: the scale is
+    // Spacing, font sizes and radii from custom properties (`var(--ds-b-size-16)`), not in rem or px: the scale is
     // in one place. `0`, `auto`, `inherit` and `em`, which follows the text, stay allowed
     'scale-unlimited/declaration-strict-value': [
       ['/^(margin|padding|inset|gap|row-gap|column-gap)/', 'font-size', '/^border(-.+)?-radius$/'],

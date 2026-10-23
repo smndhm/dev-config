@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
 import process from 'node:process';
+import useLogical from 'stylelint-use-logical';
 import valueNoUnknownCustomProperties from 'stylelint-value-no-unknown-custom-properties';
 
 /** The design tokens of @dume/ds, when the project uses them: `var()` may only name these or the project's own */
@@ -16,7 +17,7 @@ const tokens = designTokens();
 
 export default {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-idiomatic-order', 'stylelint-prettier/recommended'],
-  plugins: tokens ? [valueNoUnknownCustomProperties] : [],
+  plugins: [useLogical, ...(tokens ? [valueNoUnknownCustomProperties] : [])],
   rules: {
     // Kebab case, as stylelint-config-standard asks; a design token (`--ds-`) after @dume/ds's taxonomy:
     // --ds-b-{category}-{role}-{variant} for a base one, --ds-c-{component}-{category}-… for a component's,
@@ -31,6 +32,9 @@ export default {
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
     ],
+    // Logical properties and values (`margin-inline-start`, `text-align: start`): the same CSS for left-to-right and
+    // right-to-left languages
+    'csstools/use-logical': 'always',
     'selector-class-pattern': [
       '^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$', // https://gist.github.com/Potherca/f2a65491e63338659c3a0d2b07eee382
       {

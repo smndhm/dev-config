@@ -50,6 +50,8 @@ export default {
 };
 ```
 
+Logical properties and values, for left-to-right and right-to-left languages alike: `margin-inline-start` rather than `margin-left`, `text-align: start` rather than `left` (`stylelint-use-logical`).
+
 Custom properties are in kebab case, and a design token (`--ds-`) follows @dume/ds's taxonomy: `--ds-b-{category}-{role}-{variant}` for a base one, `--ds-c-{component}-{category}-…` for a component's, `--ds-l-{layout}-{category}-…` for a layout's, the category `color`, `font`, `size` or `outline` (`--ds-b-color-text-muted`, `--ds-c-button-size-min-height`; not `--ds-b-focus-outline`).
 
 In a project that installs `@dume/ds` (resolved from the directory Stylelint runs in), a `var()` may only name its design tokens or a custom property the project declares: a misspelled or renamed token (`var(--ds-b-color-primay)`) is an error, rather than a value the browser ignores.

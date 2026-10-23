@@ -50,9 +50,9 @@ export default {
 };
 ```
 
-Custom properties are in kebab case, and a design token (`--sd-`) follows @dume/ds's taxonomy: `--sd-b-{category}-{role}-{variant}` for a base one, `--sd-c-{component}-{category}-…` for a component's, `--sd-l-{layout}-{category}-…` for a layout's, the category `color`, `font`, `size` or `outline` (`--sd-b-color-text-muted`, `--sd-c-button-size-min-height`; not `--sd-b-focus-outline`).
+Custom properties are in kebab case, and a design token (`--ds-`) follows @dume/ds's taxonomy: `--ds-b-{category}-{role}-{variant}` for a base one, `--ds-c-{component}-{category}-…` for a component's, `--ds-l-{layout}-{category}-…` for a layout's, the category `color`, `font`, `size` or `outline` (`--ds-b-color-text-muted`, `--ds-c-button-size-min-height`; not `--ds-b-focus-outline`).
 
-In a project that installs `@dume/ds` (resolved from the directory Stylelint runs in), a `var()` may only name its design tokens or a custom property the project declares: a misspelled or renamed token (`var(--sd-b-color-primay)`) is an error, rather than a value the browser ignores.
+In a project that installs `@dume/ds` (resolved from the directory Stylelint runs in), a `var()` may only name its design tokens or a custom property the project declares: a misspelled or renamed token (`var(--ds-b-color-primay)`) is an error, rather than a value the browser ignores.
 
 ## Pre-commit hook
 

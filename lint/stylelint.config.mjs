@@ -18,16 +18,16 @@ export default {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-idiomatic-order', 'stylelint-prettier/recommended'],
   plugins: tokens ? [valueNoUnknownCustomProperties] : [],
   rules: {
-    // Kebab case, as stylelint-config-standard asks; a design token (`--sd-`) after @dume/ds's taxonomy:
-    // --sd-b-{category}-{role}-{variant} for a base one, --sd-c-{component}-{category}-… for a component's,
-    // --sd-l-{layout}-{category}-… for a layout's, the category from a closed list (`--sd-b-color-text-muted`,
-    // `--sd-c-button-size-min-height`)
+    // Kebab case, as stylelint-config-standard asks; a design token (`--ds-`) after @dume/ds's taxonomy:
+    // --ds-b-{category}-{role}-{variant} for a base one, --ds-c-{component}-{category}-… for a component's,
+    // --ds-l-{layout}-{category}-… for a layout's, the category from a closed list (`--ds-b-color-text-muted`,
+    // `--ds-c-button-size-min-height`)
     'custom-property-pattern': [
-      '^(?!sd-)[a-z][a-z0-9]*(-[a-z0-9]+)*$|^sd-(b|[cl]-[a-z0-9]+)-(color|font|size|outline)(-[a-z0-9]+)+$',
+      '^(?!ds-)[a-z][a-z0-9]*(-[a-z0-9]+)*$|^ds-(b|[cl]-[a-z0-9]+)-(color|font|size|outline)(-[a-z0-9]+)+$',
       {
         message: name =>
-          name.startsWith('--sd-')
-            ? `Expected design token "${name}" to be --sd-b-{category}-…, --sd-c-{component}-{category}-… or --sd-l-{layout}-{category}-…, the category color, font, size or outline.`
+          name.startsWith('--ds-')
+            ? `Expected design token "${name}" to be --ds-b-{category}-…, --ds-c-{component}-{category}-… or --ds-l-{layout}-{category}-…, the category color, font, size or outline.`
             : `Expected custom property name "${name}" to be kebab-case.`,
       },
     ],
@@ -38,7 +38,7 @@ export default {
         resolveNestedSelectors: true,
       },
     ],
-    // A misspelled or renamed token (`var(--sd-b-color-primay)`) is an error, rather than a value the browser ignores
+    // A misspelled or renamed token (`var(--ds-b-color-primay)`) is an error, rather than a value the browser ignores
     ...(tokens && { 'csstools/value-no-unknown-custom-properties': [true, { importFrom: [tokens] }] }),
   },
 };

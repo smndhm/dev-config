@@ -18,6 +18,19 @@ export default {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-idiomatic-order', 'stylelint-prettier/recommended'],
   plugins: tokens ? [valueNoUnknownCustomProperties] : [],
   rules: {
+    // Kebab case, as stylelint-config-standard asks; a design token (`--sd-`) after @dume/design's taxonomy:
+    // --sd-b-{category}-{role}-{variant} for a base one, --sd-c-{component}-{category}-… for a component's,
+    // --sd-l-{layout}-{category}-… for a layout's, the category from a closed list (`--sd-b-color-text-muted`,
+    // `--sd-c-button-size-min-height`)
+    'custom-property-pattern': [
+      '^(?!sd-)[a-z][a-z0-9]*(-[a-z0-9]+)*$|^sd-(b|[cl]-[a-z0-9]+)-(color|font|size|outline)(-[a-z0-9]+)+$',
+      {
+        message: name =>
+          name.startsWith('--sd-')
+            ? `Expected design token "${name}" to be --sd-b-{category}-…, --sd-c-{component}-{category}-… or --sd-l-{layout}-{category}-…, the category color, font, size or outline.`
+            : `Expected custom property name "${name}" to be kebab-case.`,
+      },
+    ],
     'selector-class-pattern': [
       '^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$', // https://gist.github.com/Potherca/f2a65491e63338659c3a0d2b07eee382
       {

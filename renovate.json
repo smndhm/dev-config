@@ -1,11 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>smndhm/dev-config//renovate/default"],
-  "packageRules": [
-    {
-      "description": "The reusable workflow uses this repository's own setup action at main: pinned, each merge would make a new commit to pin",
-      "matchDepNames": ["smndhm/dev-config", "smndhm/dev-config/**"],
-      "enabled": false
-    }
-  ]
+  "extends": ["local>smndhm/dev-config//renovate/default"]
 }

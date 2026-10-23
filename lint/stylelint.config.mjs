@@ -3,10 +3,10 @@ import { join } from 'node:path';
 import process from 'node:process';
 import valueNoUnknownCustomProperties from 'stylelint-value-no-unknown-custom-properties';
 
-/** The design tokens of @dume/design, when the project uses them: `var()` may only name these or the project's own */
+/** The design tokens of @dume/ds, when the project uses them: `var()` may only name these or the project's own */
 function designTokens() {
   try {
-    return createRequire(join(process.cwd(), 'package.json')).resolve('@dume/design/tokens.css');
+    return createRequire(join(process.cwd(), 'package.json')).resolve('@dume/ds/tokens.css');
   } catch {
     return undefined;
   }
@@ -18,7 +18,7 @@ export default {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-idiomatic-order', 'stylelint-prettier/recommended'],
   plugins: tokens ? [valueNoUnknownCustomProperties] : [],
   rules: {
-    // Kebab case, as stylelint-config-standard asks; a design token (`--sd-`) after @dume/design's taxonomy:
+    // Kebab case, as stylelint-config-standard asks; a design token (`--sd-`) after @dume/ds's taxonomy:
     // --sd-b-{category}-{role}-{variant} for a base one, --sd-c-{component}-{category}-… for a component's,
     // --sd-l-{layout}-{category}-… for a layout's, the category from a closed list (`--sd-b-color-text-muted`,
     // `--sd-c-button-size-min-height`)

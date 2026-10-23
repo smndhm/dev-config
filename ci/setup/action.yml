@@ -4,7 +4,15 @@ description: Set up Node.js (from .nvmrc) and pnpm (from packageManager), then i
 runs:
   using: composite
   steps:
-    - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+    # The packageManager version, straight from npm: pnpm/action-setup installs a pnpm of its own first, then updates it
+    # to that version (9 s, against 2 s). Before setup-node, whose pnpm cache asks pnpm where its store is; pnpm runs on
+    # the Node.js setup-node puts first in the PATH.
+    - name: Install pnpm
+      run: |
+        version=$(node -p "(require('./package.json').packageManager ?? '').match(/^pnpm@([^+]+)/)?.[1] ?? ''")
+        if [ -z "$version" ]; then echo '::error::No pnpm version in the packageManager field of package.json' && exit 1; fi
+        npm install --global --no-audit --no-fund "pnpm@$version"
+      shell: bash
 
     - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
       with:
@@ -12,5 +20,5 @@ runs:
         cache: pnpm
 
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: pnpm --version && pnpm install --frozen-lockfile
       shell: bash

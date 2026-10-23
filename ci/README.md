@@ -1,6 +1,6 @@
 # CI
 
-[`setup`](setup/action.yml): a GitHub Actions composite action that sets up Node.js from the repository's `.nvmrc`, pnpm from its `packageManager`, then runs `pnpm install --frozen-lockfile`.
+[`setup`](setup/action.yml): a GitHub Actions composite action that sets up Node.js from the repository's `.nvmrc`, pnpm from its `packageManager` (installed with npm, in about 2 s), then runs `pnpm install --frozen-lockfile`, with the pnpm store cached.
 
 ```yaml
 steps:

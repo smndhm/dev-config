@@ -27,7 +27,7 @@ minimumReleaseAgeExclude:
 1. copies `@dume/dev-config`'s files into the repository (`dev-config sync`: the [AI assistant](../ia) settings and the [pre-commit hook](../lint#pre-commit-hook)), when the repository has the package;
 2. with `changesets: true`, adds the changesets of the updated dependencies (the repository needs `@scaleway/changesets-renovate`);
 3. commits them as Renovate, so that Renovate keeps rebasing the branch;
-4. runs the repository's checks on that commit, since a commit pushed by a workflow does not trigger the CI, and reports them as the "Renovate branch checks" status, which Renovate waits for before merging.
+4. runs the repository's checks on the branch's last commit, as the CI, run on pull requests, does not run on a branch merged without one, nor on a commit pushed by a workflow, and reports them as the "Renovate branch checks" status, pending until they end, which Renovate waits for before merging.
 
 ```yaml
 name: Renovate branch

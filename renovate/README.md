@@ -1,6 +1,8 @@
 # Renovate
 
-The Renovate configuration of my repositories, in [`default.json`](default.json): `config:best-practices`, minor and patch updates, digests and lock file maintenance merged on their own once CI passes, and no minimum release age for my own `@dume/*` packages.
+The Renovate configuration of my repositories, in [`default.json`](default.json): `config:best-practices`, minor and patch updates, digests and lock file maintenance merged on their own once the Renovate branch checks pass, and no minimum release age for my own `@dume/*` packages.
+
+They are merged without a pull request (`automergeType: "branch"`), so without its notifications: Renovate opens one only when the checks fail, and for major updates, which wait for me. Merging into `main` without a pull request needs a `main` branch that does not require one, and the Renovate branch workflow below, which runs the checks on every Renovate branch.
 
 In a repository, `renovate.json`:
 

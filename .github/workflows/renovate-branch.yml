@@ -1,10 +1,11 @@
 # Reusable workflow, for each Renovate branch: copies @dume/dev-config's files into the repository (dev-config sync),
 # adds the changesets of the updated dependencies when the repository uses Changesets, then runs the repository's
-# checks on that commit and reports them as one commit status.
+# checks on the branch's last commit and reports them as one commit status.
 #
-# A commit pushed with GITHUB_TOKEN does not trigger the repository's CI, so Renovate would automerge it without
-# checks: the "checks" input runs them here instead. With "changesets", the repository needs
-# @scaleway/changesets-renovate as a dependency.
+# Renovate merges its updates without a pull request (automergeType "branch", renovate/default.json), so the
+# repository's CI, run on pull requests, does not run on them; nor on a commit pushed with GITHUB_TOKEN: the "checks"
+# input runs them here instead, on the branch's last commit, reported as pending first so that Renovate waits for
+# them. With "changesets", the repository needs @scaleway/changesets-renovate as a dependency.
 #
 # on:
 #   push:
@@ -74,15 +75,24 @@ jobs:
             echo "Nothing to commit"
           fi
 
+      # Pending until the checks end: Renovate does not merge a branch whose last commit has no status yet
+      - name: Report pending status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh api "repos/${{ github.repository }}/statuses/$(git rev-parse HEAD)" \
+            -f state=pending -f context="Renovate branch checks" \
+            -f description="The repository's checks on the branch's last commit" -f target_url="$TARGET_URL"
+
       - name: Checks
         id: checks
-        if: ${{ steps.commit.outputs.pushed == 'true' }}
         run: bash -eo pipefail -c "$CHECKS"
         env:
           CHECKS: ${{ inputs.checks }}
 
       - name: Report status
-        if: ${{ always() && steps.commit.outputs.pushed == 'true' }}
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           STATE: ${{ steps.checks.outcome == 'success' && 'success' || 'failure' }}
@@ -90,4 +100,4 @@ jobs:
         run: |
           gh api "repos/${{ github.repository }}/statuses/$(git rev-parse HEAD)" \
             -f state="$STATE" -f context="Renovate branch checks" \
-            -f description="The repository's checks on the commit of changesets and dev-config files" -f target_url="$TARGET_URL"
+            -f description="The repository's checks on the branch's last commit" -f target_url="$TARGET_URL"

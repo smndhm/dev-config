@@ -6,12 +6,15 @@
   "gitIgnoredAuthors": ["renovate[bot]@users.noreply.github.com"],
   "lockFileMaintenance": {
     "enabled": true,
-    "automerge": true
+    "automerge": true,
+    "automergeType": "branch"
   },
   "packageRules": [
     {
+      "description": "Merged on their own, without a pull request, once the Renovate branch checks pass: a pull request, and its notifications, only when they fail",
       "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "description": "My own packages, from smndhm/dev-config: no minimum release age, as pnpm's minimumReleaseAgeExclude in each repository",

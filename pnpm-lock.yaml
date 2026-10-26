@@ -201,8 +201,8 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       '@scaleway/changesets-renovate':
-        specifier: 4.0.5
-        version: 4.0.5(@changesets/cli@3.0.3)(supports-color@10.2.2)
+        specifier: 4.0.6
+        version: 4.0.6(@changesets/cli@3.0.3)(supports-color@10.2.2)
       eslint:
         specifier: 10.13.0
         version: 10.13.0(supports-color@10.2.2)
@@ -575,8 +575,8 @@ packages:
     resolution: {integrity: sha512-pOr5+q1fLYKwFN3LAJuGZEnfXDcQ73zqgDHMtGy+K+uIoUqyY+6MeDCWFwfu+4EFuq76I5EPFofoNAI+Bmmq4A==}
     engines: {node: '>=22.13'}
 
-  '@scaleway/changesets-renovate@4.0.5':
-    resolution: {integrity: sha512-3CtSh4XX9DGvR/aelWAKuNHqPrEPdZW5gKlBAa+s9WO8u6SDqZztJpfFPMsU9DPuz1J52eWM0NReolZHNWqADw==}
+  '@scaleway/changesets-renovate@4.0.6':
+    resolution: {integrity: sha512-svUaM/xLN12Y03mK/PVfWmCUED8MNc+1FhsVYFoTQSVZ5/NravYzGdqLv4MuHGvD3FX8LVkU+VCoC3DHrNsKiA==}
     engines: {node: 24.x || 25.x || 26.x}
     hasBin: true
     peerDependencies:
@@ -2280,12 +2280,11 @@ snapshots:
 
   '@pnpm/deps.graph-sequencer@1100.0.1': {}
 
-  '@scaleway/changesets-renovate@4.0.5(@changesets/cli@3.0.3)(supports-color@10.2.2)':
+  '@scaleway/changesets-renovate@4.0.6(@changesets/cli@3.0.3)(supports-color@10.2.2)':
     dependencies:
       '@changesets/cli': 3.0.3
       '@changesets/config': 4.0.1
       simple-git: 4.0.2(supports-color@10.2.2)
-      tinyglobby: 0.2.17
       yaml: 2.9.1
     transitivePeerDependencies:
       - supports-color

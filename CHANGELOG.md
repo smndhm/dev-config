@@ -1,5 +1,12 @@
 # @dume/dev-config
 
+## 1.4.1
+
+### Patch Changes
+
+- cb71a9f: Updated dependency `oxlint` to `1.90.0`.
+- 4074f15: Updated dependency `@scaleway/changesets-renovate` to `4.0.6`.
+
 ## 1.4.0
 
 ### Minor Changes

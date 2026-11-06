@@ -106,6 +106,6 @@
     "oxlint": "1.91.0",
     "playwright": "1.64.1",
     "prettier": "3.9.10",
-    "stylelint": "17.16.0"
+    "stylelint": "18.0.0"
   }
 }

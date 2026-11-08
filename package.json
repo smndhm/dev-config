@@ -27,7 +27,7 @@
     "url": "https://simon.duhem.fr"
   },
   "type": "module",
-  "packageManager": "pnpm@12.17.0",
+  "packageManager": "pnpm@12.18.0",
   "bin": {
     "dev-config": "./bin/dev-config.js"
   },

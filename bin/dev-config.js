@@ -23,7 +23,7 @@ import lintStagedConfig from '../lint/lint-staged.config.mjs';
 const PACKAGE_DIR = join(import.meta.dirname, '..');
 
 // Files of the package, copied at the same place in the repository: in smndhm/dev-config, they are its own
-const FILES = ['.claude/settings.json', '.husky/pre-commit'];
+const FILES = ['.claude/settings.json', '.claude/CLAUDE.md', '.husky/pre-commit'];
 
 const readOrNothing = file => readFile(file, 'utf8').catch(() => undefined);
 

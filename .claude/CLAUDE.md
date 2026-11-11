@@ -1,6 +1,17 @@
 # My preferences, in every repository
 
-Copied by `dev-config sync` from `@dume/dev-config`: change them in smndhm/dev-config, never in a repository. A repository's own instructions are in its `CLAUDE.md`, at its root.
+Copied by `dev-config sync` from `@dume/dev-config` into each repository, and into `~/.claude/CLAUDE.md` for a new one (see smndhm/dev-config's `ia/README.md`): change them in smndhm/dev-config, never in a repository. A repository's own instructions are in its `CLAUDE.md`, at its root.
+
+## Starting a repository
+
+A new repository starts with my configuration, as my other repositories have it (smndhm/events, smndhm/dzr-cron), before any code:
+
+- `.nvmrc` (24), `package.json` with `"packageManager": "pnpm@…"`, `"prettier": "@dume/dev-config/lint/prettier"`, and the scripts `lint` (`prettier . --check && oxlint && stylelint … && dev-config sync --check`), `lint:fix`, `test`, `typecheck` and `"prepare": "dev-config hooks"`.
+- `pnpm add -D @dume/dev-config` and the tools it configures, at exact versions (`pnpm-workspace.yaml`: `savePrefix: ''`, `minimumReleaseAgeExclude: ['@dume/*']`).
+- `.oxlintrc.json` and `stylelint.config.mjs` extending `@dume/dev-config`'s, `.prettierignore`, `renovate.json` extending `local>smndhm/dev-config//renovate/default`.
+- `pnpm exec dev-config sync`: `.claude/settings.json`, these instructions and the pre-commit hook.
+- `.github/workflows/`: the tests on pull requests to `main` with `smndhm/dev-config/ci/setup`, and the Renovate branch workflow, their actions pinned to a commit.
+- A README in English: what it is, how it works, how to develop it.
 
 ## Stack
 

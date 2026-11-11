@@ -19,3 +19,23 @@ pnpm exec dev-config sync --check   # fails when it differs, for the lint
 ```
 
 On each Renovate branch, the [Renovate branch workflow](../renovate#renovate-branches) runs `dev-config sync`: when `@dume/dev-config` changes these settings or instructions, the update brings them to the repository. Change them here, never in a repository.
+
+### In a new repository
+
+`dev-config sync` only reaches a repository that has `@dume/dev-config`. For a new one, the instructions also go to `~/.claude/CLAUDE.md`, which Claude Code reads in every project; they say how to start a repository with this configuration.
+
+In a Claude Code cloud environment, its setup script writes them at the start of every session, from the latest release, and never stops a session from starting:
+
+```sh
+# Claude Code's instructions for every repository, a new one included: from the latest @dume/dev-config
+mkdir -p ~/.claude /tmp/dev-config
+if npm pack @dume/dev-config --pack-destination /tmp/dev-config --silent >/dev/null 2>&1 \
+  && tar -xzOf /tmp/dev-config/dume-dev-config-*.tgz package/.claude/CLAUDE.md > /tmp/dev-config/CLAUDE.md 2>/dev/null; then
+  mv /tmp/dev-config/CLAUDE.md ~/.claude/CLAUDE.md
+else
+  echo "No Claude Code instructions in @dume/dev-config yet"
+fi
+rm -rf /tmp/dev-config
+```
+
+On a computer, the same lines, once, or again after a release.

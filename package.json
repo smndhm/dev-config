@@ -38,6 +38,7 @@
     "a11y/index.d.ts",
     "bin/dev-config.js",
     ".claude/settings.json",
+    ".claude/CLAUDE.md",
     ".husky/pre-commit"
   ],
   "exports": {

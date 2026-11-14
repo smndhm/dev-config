@@ -1,5 +1,13 @@
 # @dume/dev-config
 
+## 1.5.1
+
+### Patch Changes
+
+- 64d03a9: Updated dependency `prettier` to `3.10.0`.
+- 08f9f66: Updated dependency `oxlint` to `1.93.0`.
+- fa39f97: Updated dependency `stylelint-declaration-strict-value` to `1.13.0`.
+
 ## 1.5.0
 
 ### Minor Changes

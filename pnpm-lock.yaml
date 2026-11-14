@@ -188,8 +188,8 @@ importers:
         specifier: 17.0.0
         version: 17.0.0(postcss@8.5.32)(stylelint@17.16.0(supports-color@10.2.2))
       stylelint-declaration-strict-value:
-        specifier: 1.12.1
-        version: 1.12.1(stylelint@17.16.0(supports-color@10.2.2))
+        specifier: 1.13.0
+        version: 1.13.0(stylelint@17.16.0(supports-color@10.2.2))
       stylelint-prettier:
         specifier: 5.1.0
         version: 5.1.0(prettier@3.9.10)(stylelint@17.16.0(supports-color@10.2.2))
@@ -1782,11 +1782,11 @@ packages:
     peerDependencies:
       stylelint: ^17.0.0
 
-  stylelint-declaration-strict-value@1.12.1:
-    resolution: {integrity: sha512-KSQTXfWboeebH0tw3bZq5ZPLnkUBHvz9PtzAmIaqU7egLvjN7wU/F0tukFBVyGDKQEfDlLNGDNvhI/O1+6KipQ==}
+  stylelint-declaration-strict-value@1.13.0:
+    resolution: {integrity: sha512-d6Wv4qA1j+IcubFy1BjktfOwfXWK4HphJNTnvqKoqD25OqDRpiU/jSAcdZD2tXKg5WBfbH5qq1+bbg4iFzfKow==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
-      stylelint: '>=16 <=17'
+      stylelint: '>=16 <=18'
 
   stylelint-order@6.0.4:
     resolution: {integrity: sha512-0UuKo4+s1hgQ/uAxlYU4h0o0HS4NiQDud0NAUNI0aa8FJdmYHA5ZZTFHiV5FpmE3071e9pZx5j0QpVJW5zOCUA==}
@@ -3781,7 +3781,7 @@ snapshots:
       stylelint: 17.16.0(supports-color@10.2.2)
       stylelint-config-recommended: 18.0.0(stylelint@17.16.0(supports-color@10.2.2))
 
-  stylelint-declaration-strict-value@1.12.1(stylelint@17.16.0(supports-color@10.2.2)):
+  stylelint-declaration-strict-value@1.13.0(stylelint@17.16.0(supports-color@10.2.2)):
     dependencies:
       regexp.escape: 2.0.1
       stylelint: 17.16.0(supports-color@10.2.2)

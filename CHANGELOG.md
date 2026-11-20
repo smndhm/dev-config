@@ -1,5 +1,19 @@
 # @dume/dev-config
 
+## 1.5.1
+
+### Patch Changes
+
+- 15d5ce2: Updated dependency `eslint` to `10.15.0`.
+- 086f6b9: Updated dependency `prettier` to `3.10.1`.
+- 64d03a9: Updated dependency `prettier` to `3.10.0`.
+- 08f9f66: Updated dependency `oxlint` to `1.93.0`.
+- 641d1a5: Updated dependency `axe-core` to `4.14.1`.
+- fa39f97: Updated dependency `stylelint-declaration-strict-value` to `1.13.0`.
+- dfbc841: Updated dependency `playwright` to `1.65.1`.
+- 26f62c2: Updated dependency `lint-staged` to `17.6.1`.
+- 4b12dbb: Updated dependency `oxlint` to `1.94.0`.
+
 ## 1.5.0
 
 ### Minor Changes
